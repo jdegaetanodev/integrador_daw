@@ -1,0 +1,35 @@
+# Dependencias
+node_modules/
+*/node_modules/
+
+# Archivos de entorno y credenciales (¡Muy importante no subirlos!)
+.env
+.env.*
+!.env.example
+
+# Compilación y builds
+dist/
+*/dist/
+build/
+.angular/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Documentación generada
+documentation/
+*/documentation/
+
+# Archivos del sistema y del editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
