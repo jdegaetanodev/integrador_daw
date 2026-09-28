@@ -1,18 +1,33 @@
 import { Module } from '@nestjs/common';
-import { createObserveModule } from '@nestjs/observe';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
-export const { ObserveModule, ObserveInstrument } = createObserveModule();
+// Importación de entidades
+import { Usuario } from './entities/usuario.entity';
+import { Medico } from './entities/medico.entity';
+import { Reserva } from './entities/reserva.entity';
 
 @Module({
   imports: [
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'backend',
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST', 'localhost'),
+        port: Number(configService.get<number>('DB_PORT', 5432)),
+        username: configService.get<string>('DB_USERNAME', 'postgres'),
+        password: String(configService.get<string>('DB_PASSWORD') || ''),
+        database: configService.get<string>('DB_DATABASE', 'clinica_db'),
+        entities: [Usuario, Medico, Reserva], // Entidades 
+        synchronize: true, // Sincroniza y crea tablas/enums automáticamente
+      }),
     }),
   ],
   controllers: [AppController],
