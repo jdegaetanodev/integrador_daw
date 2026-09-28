@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { Usuario } from './entities/usuario.entity';
 import { Medico } from './entities/medico.entity';
 import { Reserva } from './entities/reserva.entity';
+import { AuthModule } from './auth/auth.module';
 
 // Módulos de negocio
 import { ReservasModule } from './reservas/reservas.module';
@@ -33,8 +34,12 @@ import { MedicosModule } from './medicos/medicos.module';
         synchronize: true, // Sincroniza y crea tablas/enums automáticamente
       }),
     }),
+<<<<<<< Updated upstream
     ReservasModule,
     MedicosModule,
+=======
+    AuthModule,
+>>>>>>> Stashed changes
   ],
   controllers: [AppController],
   providers: [AppService],
