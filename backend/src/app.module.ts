@@ -9,6 +9,10 @@ import { Usuario } from './entities/usuario.entity';
 import { Medico } from './entities/medico.entity';
 import { Reserva } from './entities/reserva.entity';
 
+// Módulos de negocio
+import { ReservasModule } from './reservas/reservas.module';
+import { MedicosModule } from './medicos/medicos.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,6 +33,8 @@ import { Reserva } from './entities/reserva.entity';
         synchronize: true, // Sincroniza y crea tablas/enums automáticamente
       }),
     }),
+    ReservasModule,
+    MedicosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

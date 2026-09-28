@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 
@@ -20,6 +21,16 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // Documentación OpenAPI / Swagger
+  const config = new DocumentBuilder()
+    .setTitle('API Clínica - Turnos')
+    .setDescription('Sistema de reserva de turnos médicos')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
