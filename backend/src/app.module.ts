@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { Usuario } from './entities/usuario.entity';
 import { Medico } from './entities/medico.entity';
 import { Reserva } from './entities/reserva.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Reserva } from './entities/reserva.entity';
         synchronize: true, // Sincroniza y crea tablas/enums automáticamente
       }),
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
