@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Medico } from '../entities/medico.entity';
-import { Reserva } from '../entities/reserva.entity';
-import { ReservasAdminController } from './reservas-admin.controller';
 import { ReservasController } from './reservas.controller';
 import { ReservasService } from './reservas.service';
+import { Reserva } from '../entities/reserva.entity';
+import { Medico } from '../entities/medico.entity';
+import { Usuario } from '../entities/usuario.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Reserva, Medico])],
-  controllers: [ReservasController, ReservasAdminController],
+  imports: [
+    TypeOrmModule.forFeature([Reserva, Medico, Usuario]),
+  ],
+  controllers: [ReservasController],
   providers: [ReservasService],
   exports: [ReservasService],
 })

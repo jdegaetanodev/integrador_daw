@@ -32,20 +32,20 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 
-    // 2. Verificar que el usuario se encuentre ACTIVO
+    // 2. Regla de negocio: solo usuarios en estado ACTIVO pueden ingresar
     if (usuario.estado !== EstadoUsuario.ACTIVO) {
       throw new ForbiddenException(
         'El usuario no se encuentra activo en el sistema',
       );
     }
 
-    // 3. Comparar la clave enviada con el hash guardado en BD
+    // 3. Comparar contraseña con el hash de bcrypt
     const passwordValida = await bcrypt.compare(clave, usuario.clave);
     if (!passwordValida) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 
-    // 4. Armar el payload del JWT
+    // 4. Construir payload y token
     const payload = {
       sub: usuario.id,
       documento: usuario.documento,
