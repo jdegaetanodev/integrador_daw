@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get<string>('JWT_SECRET', 'super_secreto_clinica_2026'),
+      secretOrKey: configService.getOrThrow<string>('JWT_SECRET'),
     });
   }
 
@@ -25,7 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const usuario = await this.usuarioRepository.findOne({
       where: { id: payload.sub },
       relations: {
-        medico: true, // Sintaxis fuertemente tipada de TypeORM
+        medico: true, // Sintaxis tipada de TypeORM
       },
     });
 

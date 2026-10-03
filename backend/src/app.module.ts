@@ -3,12 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
-// Importación de entidades
 import { Usuario } from './entities/usuario.entity';
 import { Medico } from './entities/medico.entity';
 import { Reserva } from './entities/reserva.entity';
 import { AuthModule } from './auth/auth.module';
+import { ReservasModule } from './reservas/reservas.module';
 
 @Module({
   imports: [
@@ -26,11 +25,12 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: String(configService.get<string>('DB_PASSWORD') || ''),
         database: configService.get<string>('DB_DATABASE', 'clinica_db'),
-        entities: [Usuario, Medico, Reserva], // Entidades 
-        synchronize: true, // Sincroniza y crea tablas/enums automáticamente
+        entities: [Usuario, Medico, Reserva],
+        synchronize: true,
       }),
     }),
     AuthModule,
+    ReservasModule, // Añadido
   ],
   controllers: [AppController],
   providers: [AppService],
