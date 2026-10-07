@@ -16,14 +16,15 @@ import {
 import { Roles } from '../common/decorators/roles.decorator';
 import { RolUsuario } from '../common/enums/roles-estados.enum';
 import { RolesGuard } from '../common/guards/roles.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ActualizarValorConsultaDto } from './dto/actualizar-valor-consulta.dto';
 import { MedicoResponseDto } from './dto/medico-response.dto';
 import { MedicosService } from './medicos.service';
 
-// TODO: agregar el guard JWT del módulo de auth: @UseGuards(JwtAuthGuard, RolesGuard)
+
 @ApiTags('Administración')
 @ApiBearerAuth()
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(RolUsuario.ADMINISTRADOR)
 @Controller('admin/medicos')
 export class MedicosAdminController {

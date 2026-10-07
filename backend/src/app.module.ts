@@ -8,6 +8,7 @@ import { Medico } from './entities/medico.entity';
 import { Reserva } from './entities/reserva.entity';
 import { AuthModule } from './auth/auth.module';
 import { ReservasModule } from './reservas/reservas.module';
+import { MedicosModule } from './medicos/medicos.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ReservasModule } from './reservas/reservas.module';
     }),
     AuthModule,
     ReservasModule, // Añadido
+    MedicosModule, // Añadido
   ],
   controllers: [AppController],
   providers: [AppService],

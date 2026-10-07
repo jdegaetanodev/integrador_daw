@@ -16,13 +16,14 @@ import {
 import { Roles } from '../common/decorators/roles.decorator';
 import { RolUsuario } from '../common/enums/roles-estados.enum';
 import { RolesGuard } from '../common/guards/roles.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ReservaResponseDto } from './dto/reserva-response.dto';
 import { ReservasService } from './reservas.service';
 
-// TODO: agregar el guard JWT del módulo de auth: @UseGuards(JwtAuthGuard, RolesGuard)
+
 @ApiTags('Administración')
 @ApiBearerAuth()
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(RolUsuario.ADMINISTRADOR)
 @Controller('admin/reservas')
 export class ReservasAdminController {
