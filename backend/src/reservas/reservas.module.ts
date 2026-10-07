@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReservasController } from './reservas.controller';
+import { ReservasAdminController } from './reservas-admin.controller';
 import { ReservasService } from './reservas.service';
 import { Reserva } from '../entities/reserva.entity';
 import { Medico } from '../entities/medico.entity';
@@ -10,7 +11,7 @@ import { Usuario } from '../entities/usuario.entity';
   imports: [
     TypeOrmModule.forFeature([Reserva, Medico, Usuario]),
   ],
-  controllers: [ReservasController],
+  controllers: [ReservasController, ReservasAdminController],
   providers: [ReservasService],
   exports: [ReservasService],
 })
