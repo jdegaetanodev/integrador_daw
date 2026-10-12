@@ -1,0 +1,32 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 55vh;
+    max-width: 20rem;
+    width: 80vw;
+    background-color: rgb(6, 7, 7);
+    border-radius: 25px;
+}
+
+
+#nombre{
+    margin-bottom: 1rem;
+}
+
+#clave{
+    margin-bottom: 1rem;
+}
+
+#header{
+    text-align: center;
+}
