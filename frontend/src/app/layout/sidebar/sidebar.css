@@ -1,0 +1,16 @@
+:host {
+    display: block;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #18181b;
+    border: 1px solid rgb(77, 77, 77);
+}
+
+.menu-title{
+    padding-left: 10px;
+}
