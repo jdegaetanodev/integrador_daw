@@ -11,20 +11,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 55vh;
+    gap: 1rem;
+    height: 40vh;
     max-width: 20rem;
     width: 80vw;
-    background-color: rgb(6, 7, 7);
+    background-color: #292929;
     border-radius: 25px;
+    color: white;
 }
 
 
-#nombre{
-    margin-bottom: 1rem;
+.field {
+    width: 80%;
 }
 
-#clave{
-    margin-bottom: 1rem;
+.field input {
+    width: 100%;
 }
 
 #header{

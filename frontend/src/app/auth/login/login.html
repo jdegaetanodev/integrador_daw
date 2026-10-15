@@ -1,8 +1,14 @@
 <form [formGroup]="form">
     <div id="main">
         <h2 id="header">Clinica [NOMBRE]</h2>
-        <input pInputText id="documento" type="text" placeholder="Documento" formControlName="documento" />
-        <p-password id="clave" formControlName="clave" [feedback]="false" autocomplete="off" placeholder="Clave" [toggleMask]="true"/>
+        <p-floatlabel class="field" variant="on">
+            <input pInputText id="documento" type="text" formControlName="documento"/>
+            <label for="documento">Documento</label>
+        </p-floatlabel>
+        <p-floatlabel class="field" variant="on">
+            <p-password inputId="clave" formControlName="clave" [feedback]="false" autocomplete="off" [toggleMask]="true" [fluid]="true"/>
+            <label for="clave">Clave</label>
+        </p-floatlabel>
         <p-button label="Iniciar sesión" (click)="iniciarSesion()"/>
     </div>
 </form>

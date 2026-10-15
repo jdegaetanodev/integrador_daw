@@ -8,12 +8,13 @@ import { AuthStore } from "../auth-store";
 import { Button } from "primeng/button";
 import { Password } from "primeng/password";
 import { InputText } from "primeng/inputtext";
+import { FloatLabel } from "primeng/floatlabel";
 
 @Component({
     selector: "app-login",
     templateUrl: "./login.html",
     styleUrl: "./login.css",
-    imports: [ReactiveFormsModule, InputText, Password, Button]
+    imports: [ReactiveFormsModule, InputText, Password, FloatLabel, Button]
 })
 
 export class Login {
@@ -24,7 +25,10 @@ export class Login {
 
     form: FormGroup = new FormGroup({
         documento: new FormControl(null, Validators.required),
-        clave: new FormControl(null, Validators.required)
+        clave: new FormControl(null, [
+            Validators.required,
+            Validators.minLength(6)
+        ])
     })
 
     iniciarSesion(){
