@@ -1,0 +1,12 @@
+@import "primeicons/primeicons.css";
+@import "@ng-select/ng-select/themes/default.theme.css";
+
+body{
+    margin: 0;
+    background-color: #dddddd;
+    color: black;
+}
+
+.p-dialog{
+    margin: 1rem;
+}
