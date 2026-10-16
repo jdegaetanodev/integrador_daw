@@ -15,12 +15,12 @@ export class Sidebar {
 
   items: MenuItem[] = [
     {
-      label: "inicio",
+      label: "Inicio",
       icon: "pi pi-home",
       routerLink: "/inicio"
     },
     {
-      label: "turnos",
+      label: "Turnos",
       icon: "pi pi-bars",
       routerLink: "/turnos"
     },

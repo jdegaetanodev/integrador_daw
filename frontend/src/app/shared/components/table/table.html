@@ -1,0 +1,49 @@
+@if (errorMessage) {
+  <p role="alert">{{ errorMessage }}</p>
+}
+
+@if (cargando) {
+  <p>Cargando reservas...</p>
+} @else {
+  <p-table [value]="reservas" [tableStyle]="{ 'min-width': '60rem' }">
+    <ng-template #header>
+      <tr>
+        <th scope="col">Fecha y hora</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Médico</th>
+        <th scope="col">Matrícula</th>
+        <th scope="col">Paciente</th>
+        <th scope="col">Documento</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-reserva>
+      <tr>
+        <td>{{ reserva.fecha_hora | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ reserva.estado }}</td>
+        <td>{{ reserva.valor_consulta | currency: 'ARS' : 'symbol' : '1.0-0' }}</td>
+        <td>
+          @if (reserva.medico; as medico) {
+            {{ medico.apellidos }}, {{ medico.nombres }}
+          } @else {
+            —
+          }
+        </td>
+        <td>{{ reserva.medico?.matricula ?? '—' }}</td>
+        <td>
+          @if (reserva.paciente; as paciente) {
+            {{ paciente.apellidos }}, {{ paciente.nombres }}
+          } @else {
+            —
+          }
+        </td>
+        <td>{{ reserva.paciente?.documento ?? '—' }}</td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="7">No hay reservas para mostrar.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+}

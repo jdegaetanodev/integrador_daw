@@ -42,7 +42,7 @@ export class Login {
 
         this.loginApiClient.iniciarSesion(documento, clave).subscribe({
             next: (res) => {
-                this.authStore.guardarToken(res.access_token)
+                this.authStore.guardarSesion(res.access_token, res.usuario.rol)
                 this.router.navigateByUrl("/inicio")
             },
             error: (err: HttpErrorResponse) => {
