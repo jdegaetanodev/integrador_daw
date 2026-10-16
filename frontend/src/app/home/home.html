@@ -1,3 +1,21 @@
 <main>
-    <p>funciona</p>
+    <h1 class="home-text">Bienvenido [NOMBRE]!</h1>
+    <p class="home-text">Desde este sistema podés consultar y gestionar los turnos médicos de la clínica.</p>
+    <div class="home-card-container">
+        <p-card header="Gestión de Turnos">
+            <p>Consultá y administrá tus turnos desde un único lugar.</p>
+            <ng-template #footer>
+                <p-button label="Ir a mis turnos" icon="pi pi-calendar" routerLink="/turnos"/>
+            </ng-template>
+        </p-card>
+    </div>
+    <h2 class="home-text">Información General</h2>
+    <div class="home-card-container">
+        <p-card header="Horarios" class="home-card">
+            <p>08:00 a 16:00</p>
+        </p-card>
+        <p-card header="Reservas" class="home-card">
+            <p>Hasta 30 días de anticipación</p>
+        </p-card>
+    </div>
 </main>

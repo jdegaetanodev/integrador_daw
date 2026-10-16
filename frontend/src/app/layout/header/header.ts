@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
+//import { AuthStore } from "../../auth/auth-store";
+//import { inject } from "@angular/core";
 
 @Component({
   selector: 'app-header',
@@ -9,9 +11,11 @@ import { Menu } from 'primeng/menu';
   styleUrl: './header.css',
 })
 export class Header {
+  //private readonly authStore = inject(AuthStore);
+
   items: MenuItem[] = [
     {
-      label: "iniciar sesión",
+      label: "Cerrar sesión",
       icon: "pi pi-user",
       routerLink: "/login"
     }
