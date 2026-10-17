@@ -1,0 +1,41 @@
+<h2>Valor de consulta de los médicos</h2>
+
+<p class="aviso">
+  El cambio aplica solo a turnos nuevos. Los turnos ya reservados conservan el valor que tenían al reservarse.
+</p>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Matrícula</th>
+      <th>Médico</th>
+      <th>Valor de consulta</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (m of lista(); track m.id) {
+      <tr>
+        <td>{{ m.matricula }}</td>
+        <td>{{ m.apellidos }}, {{ m.nombres }}</td>
+        <td>
+          <input type="number" min="1" [value]="m.valor_consulta" #valor />
+        </td>
+        <td>
+          <button (click)="guardar(m, valor.value)">Guardar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">No hay médicos cargados</td>
+      </tr>
+    }
+  </tbody>
+</table>
