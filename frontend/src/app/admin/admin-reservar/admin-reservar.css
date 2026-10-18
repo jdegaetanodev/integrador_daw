@@ -1,0 +1,4 @@
+.formulario { display: grid; gap: 1rem; max-width: 24rem; }
+label { display: grid; gap: 0.25rem; }
+.error { color: #c62828; }
+.exito { color: #2e7d32; }

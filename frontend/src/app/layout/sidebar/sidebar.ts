@@ -14,6 +14,7 @@ import { AuthStore } from '../../auth/auth-store';
 export class Sidebar {
   private readonly router: Router = inject(Router);
   private readonly authStore = inject(AuthStore);
+  private readonly rol = this.authStore.obtenerRol();
 
   items: MenuItem[] = [
     {
@@ -26,12 +27,31 @@ export class Sidebar {
       icon: "pi pi-bars",
       routerLink: "/turnos"
     },
-    ...(this.authStore.obtenerRol() === 'ADMINISTRADOR'
+    ...(this.rol === 'MEDICO'
       ? [{
-          label: "Valor de consulta",
-          icon: "pi pi-dollar",
-          routerLink: "/inicio/admin/medicos"
+          label: "Mis turnos",
+          icon: "pi pi-calendar",
+          routerLink: "/inicio/medico/turnos"
         }]
+      : []),
+    ...(this.rol === 'ADMINISTRADOR'
+      ? [
+          {
+            label: "Gestión de turnos",
+            icon: "pi pi-calendar",
+            routerLink: "/inicio/admin/turnos"
+          },
+          {
+            label: "Reservar turno",
+            icon: "pi pi-plus",
+            routerLink: "/inicio/admin/reservar"
+          },
+          {
+            label: "Valor de consulta",
+            icon: "pi pi-dollar",
+            routerLink: "/inicio/admin/medicos"
+          },
+        ]
       : []),
   ]
 }
