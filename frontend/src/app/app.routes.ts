@@ -2,11 +2,13 @@ import { Routes } from '@angular/router';
 import { Login } from "./auth/login/login"
 import { MainLayout } from "./layout/main-layout/main-layout"
 import { Home } from "./home/home"
+import { roleGuard } from "./auth/role-guard"
+import { AdminMedicos } from "./admin/admin-medicos/admin-medicos"
 
 export const routes: Routes = [
     { path: "login", component: Login },
-    { 
-        path: "inicio", 
+    {
+        path: "inicio",
         component: MainLayout,
         children: [{
             path: "",
@@ -16,6 +18,12 @@ export const routes: Routes = [
         {
             path: "home",
             component: Home,
+        },
+        {
+            path: "admin/medicos",
+            component: AdminMedicos,
+            canActivate: [roleGuard],
+            data: { roles: ['ADMINISTRADOR'] },
         },
         /*
         La propiedad "children" configura qué componente mostrar en el router-outlet del main layout, definido en su respectivo html
