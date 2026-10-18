@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
+import { AuthStore } from '../../auth/auth-store';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,8 @@ import { Menu } from 'primeng/menu';
 
 export class Sidebar {
   private readonly router: Router = inject(Router);
+  private readonly authStore = inject(AuthStore);
+  private readonly rol = this.authStore.obtenerRol();
 
   items: MenuItem[] = [
     {
@@ -24,5 +27,31 @@ export class Sidebar {
       icon: "pi pi-bars",
       routerLink: "/turnos"
     },
+    ...(this.rol === 'MEDICO'
+      ? [{
+          label: "Mis turnos",
+          icon: "pi pi-calendar",
+          routerLink: "/inicio/medico/turnos"
+        }]
+      : []),
+    ...(this.rol === 'ADMINISTRADOR'
+      ? [
+          {
+            label: "Gestión de turnos",
+            icon: "pi pi-calendar",
+            routerLink: "/inicio/admin/turnos"
+          },
+          {
+            label: "Reservar turno",
+            icon: "pi pi-plus",
+            routerLink: "/inicio/admin/reservar"
+          },
+          {
+            label: "Valor de consulta",
+            icon: "pi pi-dollar",
+            routerLink: "/inicio/admin/medicos"
+          },
+        ]
+      : []),
   ]
 }

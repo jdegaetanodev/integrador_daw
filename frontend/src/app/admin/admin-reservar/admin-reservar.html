@@ -1,0 +1,46 @@
+<h2>Reservar turno</h2>
+
+@if (error()) {
+  <p role="alert" class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<div class="formulario">
+  <label>
+    Médico
+    <select #selMedico>
+      <option value="">Elegí un médico</option>
+      @for (m of medicos(); track m.id) {
+        <option [value]="m.id">{{ etiqueta(m) }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Id del paciente
+    <input #inpPaciente type="number" min="1" />
+  </label>
+
+  <label>
+    Fecha
+    <input #inpFecha type="date" [min]="minFecha" [max]="maxFecha" />
+  </label>
+
+  <label>
+    Hora
+    <select #selHora>
+      <option value="">Elegí una hora</option>
+      @for (h of horas; track h) {
+        <option [value]="h">{{ h }}</option>
+      }
+    </select>
+  </label>
+
+  <p-button
+    label="Reservar"
+    [loading]="enviando()"
+    (onClick)="reservar(selMedico.value, inpPaciente.value, inpFecha.value, selHora.value)"
+  />
+</div>

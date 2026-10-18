@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Medico } from '../entities/medico.entity';
 import { ActualizarValorConsultaDto } from './dto/actualizar-valor-consulta.dto';
 import { MedicoResponseDto } from './dto/medico-response.dto';
+import { MedicoListadoResponseDto } from './dto/medico-listado-response.dto';
 
 @Injectable()
 export class MedicosService {
@@ -23,4 +24,19 @@ export class MedicosService {
     medico.valor_consulta = dto.valor_consulta;
     return MedicoResponseDto.fromEntity(await this.medicosRepo.save(medico));
   }
+  async listarMedicos(): Promise<MedicoListadoResponseDto[]> {
+  
+const medicos = await this.medicosRepo.find({
+  relations: { usuario: true },
+  order: { id: 'ASC' },
+});
+
+
+  return medicos.map((medico) => ({
+    id: medico.id,
+    nombres: medico.usuario.nombres,
+    apellidos: medico.usuario.apellidos,
+    valor_consulta: medico.valor_consulta,
+  }));
+}
 }
