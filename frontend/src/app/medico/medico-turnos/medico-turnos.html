@@ -1,0 +1,52 @@
+<h2>Mis turnos</h2>
+
+<label>
+  Fecha:
+  <input type="date" [value]="fecha()" (change)="cambiarFecha($any($event.target).value)" />
+</label>
+
+@if (error()) {
+  <p role="alert" class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<p-table [value]="turnos()" [loading]="cargando()" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #header>
+    <tr>
+      <th scope="col">Hora</th>
+      <th scope="col">Paciente</th>
+      <th scope="col">Documento</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-turno>
+    <tr>
+      <td>{{ turno.fecha_hora | date: 'HH:mm' : zona }}</td>
+      <td>
+        @if (turno.paciente; as paciente) {
+          {{ paciente.apellidos }}, {{ paciente.nombres }}
+        } @else {
+          —
+        }
+      </td>
+      <td>{{ turno.paciente?.documento ?? '—' }}</td>
+      <td>
+        <span [class]="'estado-' + turno.estado.toLowerCase()">{{ turno.estado }}</span>
+      </td>
+      <td>
+        @if (turno.estado === 'ACTIVO') {
+          <p-button label="Atendido" severity="success" size="small" (onClick)="marcar(turno, 'ATENDIDO')" />
+          <p-button label="Ausente" severity="secondary" size="small" (onClick)="marcar(turno, 'AUSENTE')" />
+        }
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td colspan="5">No hay turnos para esta fecha.</td>
+    </tr>
+  </ng-template>
+</p-table>

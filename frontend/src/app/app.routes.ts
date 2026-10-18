@@ -4,6 +4,10 @@ import { MainLayout } from "./layout/main-layout/main-layout"
 import { Home } from "./home/home"
 import { roleGuard } from "./auth/role-guard"
 import { AdminMedicos } from "./admin/admin-medicos/admin-medicos"
+import { MedicoTurnos } from "./medico/medico-turnos/medico-turnos"
+import { AdminTurnos } from "./admin/admin-turnos/admin-turnos"
+import { AdminReservar } from "./admin/admin-reservar/admin-reservar"
+
 
 export const routes: Routes = [
     { path: "login", component: Login },
@@ -25,17 +29,25 @@ export const routes: Routes = [
             canActivate: [roleGuard],
             data: { roles: ['ADMINISTRADOR'] },
         },
-        /*
-        La propiedad "children" configura qué componente mostrar en el router-outlet del main layout, definido en su respectivo html
         {
-            path: "turnos",
-            component: Turnos,
+            path: "medico/turnos",
+            component: MedicoTurnos,
+            canActivate: [roleGuard],
+            data: { roles: ['MEDICO'] },
         },
         {
-            path: "adminstracion",
-            component: Administracion,
-            data: { roles: ['ADMINISTRADOR'] } <- Para proteger una ruta con roleGuard
-        },*/
-        ]},
-        { path: "**", redirectTo: "login" }
-    ];
+            path: "admin/turnos",
+            component: AdminTurnos,
+            canActivate: [roleGuard],
+            data: { roles: ['ADMINISTRADOR'] },
+        },
+        {
+            path: "admin/reservar",
+            component: AdminReservar,
+            canActivate: [roleGuard],
+            data: { roles: ['ADMINISTRADOR'] },
+        },
+        ]
+    },
+    { path: "**", redirectTo: "login" }
+];
