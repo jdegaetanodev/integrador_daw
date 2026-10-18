@@ -31,8 +31,8 @@ export class AdminMedicos {
     this.exito.set('');
 
     const numero = Number(valor);
-    if (!Number.isFinite(numero) || numero <= 0) {
-      this.error.set('El valor de la consulta debe ser un número mayor a 0');
+    if (!Number.isInteger(numero) || numero < 1) {
+      this.error.set('El valor de la consulta debe ser un número entero mayor o igual a 1');
       return;
     }
 
