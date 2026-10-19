@@ -7,6 +7,8 @@ import { AdminMedicos } from "./admin/admin-medicos/admin-medicos"
 import { MedicoTurnos } from "./medico/medico-turnos/medico-turnos"
 import { AdminTurnos } from "./admin/admin-turnos/admin-turnos"
 import { AdminReservar } from "./admin/admin-reservar/admin-reservar"
+import { PacienteTurnos } from "./paciente/paciente-turnos/paciente-turnos" 
+import { PacienteReservar } from "./paciente/paciente-reservar/paciente-reservar"
 
 
 export const routes: Routes = [
@@ -46,6 +48,18 @@ export const routes: Routes = [
             component: AdminReservar,
             canActivate: [roleGuard],
             data: { roles: ['ADMINISTRADOR'] },
+        },
+        {
+            path: "paciente/turnos",
+            component: PacienteTurnos,
+            canActivate: [roleGuard],
+            data: { roles: ['PACIENTE'] },
+        },
+        {
+            path: "paciente/reservar",
+            component: PacienteReservar,
+            canActivate: [roleGuard],
+            data: { roles: ['PACIENTE'] },
         },
         ]
     },

@@ -53,5 +53,19 @@ export class Sidebar {
           },
         ]
       : []),
+    ...(this.rol === 'PACIENTE'
+      ? [
+          {
+            label: "Mis turnos",
+            icon: "pi pi-calendar",
+            routerLink: "/inicio/paciente/turnos"
+          },
+          {
+            label: "Reservar turno",
+            icon: "pi pi-plus",
+            routerLink: "/inicio/paciente/reservar"
+          },
+        ]
+      : []),
   ]
 }
