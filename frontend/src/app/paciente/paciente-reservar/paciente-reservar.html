@@ -1,0 +1,60 @@
+<h2>Reservar turno</h2>
+
+@if (error()) {
+  <p role="alert" class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<div class="formulario">
+  <label>
+    Médico
+    <select (change)="elegirMedico($any($event.target).value)">
+      <option value="">Elegí un médico</option>
+      @for (m of medicos(); track m.id) {
+        <option [value]="m.id">{{ m.apellidos }}, {{ m.nombres }}</option>
+      }
+    </select>
+  </label>
+
+  @if (medico(); as m) {
+    <p>
+      Valor de la consulta: <strong>{{ m.valor_consulta | currency: 'ARS' : 'symbol' : '1.0-0' }}</strong>
+      (queda congelado al reservar)
+    </p>
+  }
+
+  <label>
+    Fecha
+    <input
+      type="date"
+      [min]="minFecha"
+      [max]="maxFecha"
+      (change)="elegirFecha($any($event.target).value)"
+    />
+  </label>
+</div>
+
+@if (medico() && fecha()) {
+  <h3>Horarios</h3>
+  <div class="horarios">
+    @for (h of horas; track h) {
+      <p-button
+        [label]="h"
+        [disabled]="!estaLibre(h)"
+        [outlined]="h !== hora()"
+        (onClick)="hora.set(h)"
+      />
+    }
+  </div>
+  <small class="aviso">Los horarios deshabilitados están ocupados o ya pasaron.</small>
+}
+
+@if (medico() && hora()) {
+  <p>
+    Turno: <strong>{{ fechaHoraElegida() | date: 'dd/MM/yyyy HH:mm' : zona }}</strong> con
+    {{ medico()!.apellidos }}, {{ medico()!.nombres }}
+  </p>
+  <p-button label="Reservar" [loading]="enviando()" (onClick)="reservar()" />
+}

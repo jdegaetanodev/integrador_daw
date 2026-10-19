@@ -1,0 +1,7 @@
+.estado-activo { color: #1976d2; font-weight: 600; }
+.estado-atendido { color: #2e7d32; font-weight: 600; }
+.estado-ausente { color: #ed6c02; font-weight: 600; }
+.estado-cancelado { color: #c62828; font-weight: 600; }
+.error { color: #c62828; }
+.exito { color: #2e7d32; }
+.aviso { display: block; color: #666; }

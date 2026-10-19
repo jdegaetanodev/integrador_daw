@@ -28,6 +28,12 @@ export class TurnosService {
     return this.http.patch<{ mensaje: string }>(`${API}/reservas/${id}/cancelar`, {});
   }
 
+  //Horarios libres de un medico en una fecha "YYYY-MM-DD"devuelve por ejemplo ['08:00:00', '10:00:00']
+   consultarDisponibilidad(idMedico: number, fecha: string): Observable<string[]> {
+    const params = new HttpParams().set('id_medico', idMedico).set('fecha', fecha);
+    return this.http.get<string[]>(`${API}/reservas/disponibilidad`, { params });
+  }
+  
   reservar(body: {
     id_medico: number;
     fecha_hora: string;

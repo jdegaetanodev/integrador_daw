@@ -12,6 +12,7 @@ dist/
 */dist/
 build/
 .angular/
+*.tsbuildinfo
 
 # Logs
 npm-debug.log*

@@ -1,0 +1,94 @@
+<h2>Mis turnos</h2>
+
+@if (error()) {
+  <p role="alert" class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<h3>Activos</h3>
+<p-table [value]="activos()" [loading]="cargando()" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #header>
+    <tr>
+      <th scope="col">Fecha y hora</th>
+      <th scope="col">Médico</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-turno>
+    <tr>
+      <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' : zona }}</td>
+      <td>
+        @if (turno.medico; as medico) {
+          {{ medico.apellidos }}, {{ medico.nombres }}
+        } @else {
+          —
+        }
+      </td>
+      <!-- valor congelado al momento de reservar -->
+      <td>{{ turno.valor_consulta | currency: 'ARS' : 'symbol' : '1.0-0' }}</td>
+      <td>
+        <span [class]="'estado-' + turno.estado.toLowerCase()">{{ turno.estado }}</span>
+      </td>
+      <td>
+        <p-button
+          label="Cancelar"
+          severity="danger"
+          size="small"
+          [disabled]="!puedeCancelar(turno)"
+          (onClick)="cancelar(turno)"
+        />
+        @if (!puedeCancelar(turno)) {
+          <small class="aviso">Solo se puede cancelar hasta el día anterior</small>
+        }
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td colspan="5">No tenés turnos activos.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<h3>Historial</h3>
+<p-table
+  [value]="historicos()"
+  [loading]="cargando()"
+  [paginator]="true"
+  [rows]="10"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template #header>
+    <tr>
+      <th scope="col">Fecha y hora</th>
+      <th scope="col">Médico</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Estado</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-turno>
+    <tr>
+      <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' : zona }}</td>
+      <td>
+        @if (turno.medico; as medico) {
+          {{ medico.apellidos }}, {{ medico.nombres }}
+        } @else {
+          —
+        }
+      </td>
+      <td>{{ turno.valor_consulta | currency: 'ARS' : 'symbol' : '1.0-0' }}</td>
+      <td>
+        <span [class]="'estado-' + turno.estado.toLowerCase()">{{ turno.estado }}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td colspan="4">No hay turnos en tu historial.</td>
+    </tr>
+  </ng-template>
+</p-table>
