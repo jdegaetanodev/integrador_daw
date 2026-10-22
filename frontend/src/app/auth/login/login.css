@@ -32,3 +32,17 @@
 #header{
     text-align: center;
 }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 200px;
+}
+
+h2 {
+    margin: 0;
+}
