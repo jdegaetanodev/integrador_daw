@@ -22,11 +22,6 @@ export class Sidebar {
       icon: "pi pi-home",
       routerLink: "/inicio"
     },
-    {
-      label: "Turnos",
-      icon: "pi pi-bars",
-      routerLink: "/turnos"
-    },
     ...(this.rol === 'MEDICO'
       ? [{
           label: "Mis turnos",

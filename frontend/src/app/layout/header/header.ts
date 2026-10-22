@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
-//import { AuthStore } from "../../auth/auth-store";
-//import { inject } from "@angular/core";
+import { AuthStore } from '../../auth/auth-store';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +10,13 @@ import { Menu } from 'primeng/menu';
   styleUrl: './header.css',
 })
 export class Header {
-  //private readonly authStore = inject(AuthStore);
+  private readonly authStore = inject(AuthStore);
 
   items: MenuItem[] = [
     {
       label: "Cerrar sesión",
       icon: "pi pi-user",
-      routerLink: "/login"
+      command: () => this.authStore.cerrarSesion(),
     }
   ]
 }

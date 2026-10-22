@@ -12,3 +12,19 @@
     width: 100%;
     background-color: #6086E4;
 }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand h2 {
+    margin: 0;
+}

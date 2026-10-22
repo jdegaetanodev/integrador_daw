@@ -1,11 +1,17 @@
 <main>
-    <h1 class="home-text">Bienvenido [NOMBRE]!</h1>
+    <h1 class="home-text">
+        @if (nombreUsuario; as nombre) {
+            Bienvenido {{ nombre }}!
+        } @else {
+            Bienvenido!
+        }
+    </h1>
     <p class="home-text">Desde este sistema podés consultar y gestionar los turnos médicos de la clínica.</p>
     <div class="home-card-container">
         <p-card header="Gestión de Turnos">
             <p>Consultá y administrá tus turnos desde un único lugar.</p>
             <ng-template #footer>
-                <p-button label="Ir a mis turnos" icon="pi pi-calendar" routerLink="/turnos"/>
+                <p-button label="Ir a mis turnos" icon="pi pi-calendar" [routerLink]="rutaTurnos"/>
             </ng-template>
         </p-card>
     </div>
