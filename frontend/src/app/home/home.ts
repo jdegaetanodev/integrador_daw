@@ -13,6 +13,10 @@ import { AuthStore } from '../auth/auth-store';
 export class Home {
   private readonly authStore = inject(AuthStore);
 
+  get nombreUsuario(): string | null {
+    return this.authStore.obtenerNombres();
+  }
+
   get rutaTurnos(): string {
     switch (this.authStore.obtenerRol()) {
       case 'PACIENTE':

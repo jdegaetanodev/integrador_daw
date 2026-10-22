@@ -10,9 +10,10 @@ export type RolUsuario = "MEDICO" | "PACIENTE" | "ADMINISTRADOR";
 export class AuthStore {
     private readonly router: Router = inject(Router);
 
-    guardarSesion(token: string, rol: RolUsuario): void{
+    guardarSesion(token: string, rol: RolUsuario, nombres: string): void{
         sessionStorage.setItem("accessToken", token);
         sessionStorage.setItem("rolUsuario", rol);
+        sessionStorage.setItem("nombresUsuario", nombres);
     }
 
     obtenerToken(): string | null{
@@ -29,9 +30,15 @@ export class AuthStore {
         return null;
     }
 
+    obtenerNombres(): string | null {
+        const nombres = sessionStorage.getItem("nombresUsuario")?.trim();
+        return nombres || null;
+    }
+
     cerrarSesion(): void{
         sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("rolUsuario");
+        sessionStorage.removeItem("nombresUsuario");
         this.router.navigateByUrl("/login");
     }
 }

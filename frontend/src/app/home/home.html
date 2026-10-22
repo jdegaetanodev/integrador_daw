@@ -1,5 +1,11 @@
 <main>
-    <h1 class="home-text">Bienvenido [NOMBRE]!</h1>
+    <h1 class="home-text">
+        @if (nombreUsuario; as nombre) {
+            Bienvenido {{ nombre }}!
+        } @else {
+            Bienvenido!
+        }
+    </h1>
     <p class="home-text">Desde este sistema podés consultar y gestionar los turnos médicos de la clínica.</p>
     <div class="home-card-container">
         <p-card header="Gestión de Turnos">
